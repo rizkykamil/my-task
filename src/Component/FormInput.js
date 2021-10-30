@@ -10,20 +10,24 @@ class FormInput extends React.Component {
         this.setState({text: e.target.value})
     }
     submit = e => {
-        e.preventDeafault();
+        e.preventDefault()
         if (this.state.text !== ""){
             this.props.add(this.state.text)
         }
+        this.setState({
+            text: ""
+        })
     }
     render(){
         return (
-        <form style = {inputFrom} onSubmit>
+        <form style = {inputFrom} onSubmit ={this.submit}>
             <input 
             type= "text"
             onChange={this.change}
+            value ={this.state.text}
             style = {input}
-            placeholder = "addtask"/>
-            <Button text="add" variant= "primary"/>
+            placeholder = "add task"/>
+            <Button text="add" variant= "primary" action={this.submit}/>
         </form>
         )
     }
