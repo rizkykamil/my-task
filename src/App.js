@@ -17,11 +17,28 @@ class App extends React.Component{
                 title : "work"
             }
         ],
-        isEdit: false
+        isEdit: false,
+
+        editData:{
+            id: "",
+            title: ""
+        }
     }
-    openModal =() =>{
+    setTitle =e =>[
         this.setState({
-            isEdit: true
+            editdata:{
+                ...this.state.editData,
+                title: e.target.value
+            }
+        })
+    ]
+    openModal =(id, data) =>{
+        this.setState({
+            isEdit: true,
+            editData : {
+                id,
+                title : data
+            }
         }) 
     }
     closeModal = () =>{
@@ -72,7 +89,10 @@ class App extends React.Component{
                 
                 <EditModal 
                 edit = {this.state.isEdit}
-                close = {this.closeModal}/>
+                close = {this.closeModal}
+                change = {this.setTitle}
+                data = {this.state.editData} 
+                />
             </div>
         );
     }
